@@ -3,4 +3,4 @@ PCB to connect Brink Renovent and Elan
 
 ![Schematic](Schematic.png)
 
-![PCB}(PCB_WTW.png)
+![PCB](PCB_WTW.png)
