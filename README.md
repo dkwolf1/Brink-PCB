@@ -1,7 +1,7 @@
 # Brink-PCB
 PCB to connect Brink Renovent and Elan
 
-Need improvements
+Busy with webinterface and MQTT
 
 ![Schematic](Schematic.png)
 
