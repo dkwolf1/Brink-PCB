@@ -1,0 +1,182 @@
+esphome:
+  name: esphome-web-d0df24
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+bluetooth_proxy:
+  active: True
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  
+  
+  manual_ip:
+   static_ip: ***
+   gateway: ****
+   subnet: ****
+   
+  ap:
+    ssid: "Esphome-Web-wtw"
+    password: !secret wifi_ap_password
+
+captive_portal:
+
+time:
+  - platform: homeassistant
+    id: time_homeassistant
+    on_time_sync:
+      - component.update: d0df24_uptime_timestamp
+
+switch:
+  - platform: gpio
+    name: "WTW position 4"
+    id: relay9
+    interlock: [relay1,relay2,]
+    pin: GPIO19
+    inverted: False
+    
+  - platform: gpio
+    name: "WTW position 3"
+    id: relay1
+    interlock: [relay2,relay9,]
+    pin: GPIO27
+    inverted: false
+    
+  - platform: gpio
+    name: "WTW position 2"
+    id: relay2
+    interlock: [relay1,relay9,]
+    pin: GPIO26
+    inverted: false
+
+  - platform: template
+    name: "position1"
+    id: "position1"
+    turn_on_action: 
+     - switch.turn_off: relay1
+     - switch.turn_off: relay2
+     - switch.turn_off: relay9
+     - switch.turn_off: position1
+     
+  - platform: gpio
+    name: "Elan beneden position 2"
+    id: relay3
+    interlock: [relay4,relay5]
+    pin: GPIO33
+    inverted: false
+
+  - platform: gpio
+    name: "Elan beneden position 3"
+    id: relay4
+    interlock: [relay3,relay5]
+    pin: GPIO25
+    inverted: false
+     
+  - platform: gpio
+    name: "Elan beneden position 4"
+    id: relay5
+    interlock: [relay3,relay4]
+    pin: GPIO14
+    inverted: false
+    
+  - platform: template
+    name: "Elan beneden position 1"
+    id: "elanbenedenp1"
+    turn_on_action:
+     - switch.turn_off: relay3
+     - switch.turn_off: relay4
+     - switch.turn_off: relay5
+     - switch.turn_off: elanbenedenp1
+
+  - platform: gpio
+    name: "Elan boven position 2"
+    id: relay6
+    interlock: [relay7,relay8]
+    pin: GPIO32
+    inverted: false
+
+  - platform: gpio
+    name: "Elan boven position 3"
+    id: relay7
+    interlock: [relay6,relay8]
+    pin: GPIO23
+    inverted: false
+
+  - platform: gpio
+    name: "Elan boven position 4"
+    id: relay8
+    interlock: [relay6,relay7]
+    pin: GPIO22
+    inverted: false
+    
+  - platform: template
+    name: "Elan boven position 1"
+    id: "elanbovenp1"
+    turn_on_action:
+     - switch.turn_off: relay6
+     - switch.turn_off: relay7
+     - switch.turn_off: relay8
+     - switch.turn_off: elanbovenp1
+
+### ESP sensoren ###
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: IP-adres
+      id: d0df24_ip_adres
+      icon: mdi:ip-network
+    ssid:
+      name: Netwerk
+      id: d0df24_netwerk
+      icon: mdi:access-point-network
+    mac_address:
+      name: Mac-adres
+      id: d0df24_mac_adres
+      icon: mdi:folder-key-network-outline
+      
+sensor:
+  - platform: wifi_signal
+    name: "d0df24 WiFi Signal"
+    update_interval: 120s
+  
+  - platform: uptime
+    id: d0df24_uptime
+  
+  - platform: internal_temperature
+    name: "esp32_temperatuur"
+    device_class: temperature
+    accuracy_decimals: 1
+    unit_of_measurement: °C
+    update_interval: 20s
+
+      
+ 
+  - platform: template
+    id: d0df24_uptime_timestamp
+    name: "online sinds"
+    device_class: "timestamp"
+    accuracy_decimals: 0
+    update_interval: never
+    lambda: |-
+      static float timestamp = (
+        id(time_homeassistant).utcnow().timestamp - id(d0df24_uptime).state
+      );
+      return timestamp;  
+    
+button:  
+  - platform: restart
+    name: "Restart device"
+    
