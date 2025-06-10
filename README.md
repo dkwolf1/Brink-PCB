@@ -1,9 +1,7 @@
 # Brink-PCB
-PCB to connect Brink Renovent and Elan
-
-Busy with webinterface and MQTT
-
-I integrated in esphome, work like a charm. Check yaml
+This PCB connects the Brink Renovent and Elan systems.
+A web interface and MQTT support are under development.
+This project integrates with ESPHome and works well—see [`Wtw.yaml`](Wtw.yaml) for configuration.
 
 ## Firmware options
 
@@ -19,7 +17,7 @@ prefer the Arduino IDE, follow the steps below to build the sketch in
    - **AsyncTCP**
    - **PubSubClient** (only needed when MQTT is enabled)
 2. Open `arduino/BrinkWTW.ino` in the Arduino IDE.
-3. Select an ESP32 board (for example **ESP32 Dev Module**) and upload the
+3. Select an ESP32 board (for example, **ESP32 Dev Module**) and upload the
    sketch to your device.
 
 Before compiling, edit `BrinkWTW.ino` to set your WiFi credentials:
@@ -35,7 +33,7 @@ The sketch connects to this network at startup.
 To compile the sketch with MQTT support, define the `USE_MQTT` flag. The
 simplest way in the Arduino IDE is to add `#define USE_MQTT` near the top of
 `BrinkWTW.ino` before compiling. When the flag is omitted, the sketch is built
-without the MQTT client and no additional libraries are required.
+without the MQTT client, and no additional libraries are required.
 
 ## Web interface
 
