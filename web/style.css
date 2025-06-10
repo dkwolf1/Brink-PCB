@@ -8,6 +8,10 @@ body {
 main {
   max-width: 800px;
   margin: auto;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 h1 {
@@ -17,6 +21,8 @@ h1 {
 
 .section {
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .buttons {
@@ -28,11 +34,21 @@ h1 {
 
 button {
   padding: 6px 12px;
+  border: none;
+  background-color: #3276b1;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #275a8c;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 0.5rem;
 }
 
 th, td {
