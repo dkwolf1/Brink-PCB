@@ -3,6 +3,13 @@
 #include <ESPAsyncWebServer.h>
 #include <AsyncTCP.h>
 #include <LittleFS.h>
+#ifndef WIFI_SSID
+#define WIFI_SSID "your-ssid"
+#endif
+
+#ifndef WIFI_PASSWORD
+#define WIFI_PASSWORD "your-password"
+#endif
 #ifdef USE_MQTT
 #include <PubSubClient.h>
 
@@ -23,6 +30,12 @@ AsyncWebServer server(80);
 #ifdef USE_MQTT
 void initMqtt() {
   mqttClient.setServer(MQTT_HOST, MQTT_PORT);
+}
+
+void ensureMqtt() {
+  if (!mqttClient.connected()) {
+    mqttClient.connect("BrinkWTW");
+  }
 }
 #endif
 
@@ -58,6 +71,11 @@ void handleSwitch(AsyncWebServerRequest *request) {
   for (auto &sw : switches) {
     if (id == sw.id) {
       digitalWrite(sw.pin, state ? HIGH : LOW);
+#ifdef USE_MQTT
+      ensureMqtt();
+      String topic = String("brink/") + id;
+      mqttClient.publish(topic.c_str(), state ? "1" : "0");
+#endif
       request->send(200, "text/plain", "OK");
       return;
     }
@@ -77,10 +95,19 @@ void setup() {
     digitalWrite(sw.pin, LOW);
   }
 
-  WiFi.mode(WIFI_AP_STA);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Connecting to WiFi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print('.');
+  }
+  Serial.println();
+  Serial.println(WiFi.localIP());
 
 #ifdef USE_MQTT
   initMqtt();
+  ensureMqtt();
 #endif
 
   server.on("/sensors", HTTP_GET, [](AsyncWebServerRequest *req){
@@ -110,6 +137,7 @@ void setup() {
 
 void loop() {
 #ifdef USE_MQTT
+  ensureMqtt();
   mqttClient.loop();
 #endif
 }

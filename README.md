@@ -22,6 +22,14 @@ prefer the Arduino IDE, follow the steps below to build the sketch in
 3. Select an ESP32 board (for example **ESP32 Dev Module**) and upload the
    sketch to your device.
 
+Before compiling, edit `BrinkWTW.ino` to set your WiFi credentials:
+
+```cpp
+#define WIFI_SSID "your-ssid"
+#define WIFI_PASSWORD "your-password"
+```
+The sketch connects to this network at startup.
+
 ### Enabling MQTT
 
 To compile the sketch with MQTT support, define the `USE_MQTT` flag. The
@@ -29,12 +37,13 @@ simplest way in the Arduino IDE is to add `#define USE_MQTT` near the top of
 `BrinkWTW.ino` before compiling. When the flag is omitted, the sketch is built
 without the MQTT client and no additional libraries are required.
 
-## Extra webinterface
+## Web interface
 
-The firmware now enables the ESPHome `web_server` component. Browse to the
-device IP address to access a simple control panel. A minimal example page is
-provided in [`web/index.html`](web/index.html) which can be uploaded using the
-ESPHome dashboard or served separately.
+The `web` folder contains a small HTML interface. When using ESPHome, the
+files can be uploaded via the dashboard. For the Arduino sketch, upload the
+contents of the `web` directory to LittleFS using the [ESP32 LittleFS
+plugin](https://github.com/lorol/LITTLEFS) before flashing. Once the ESP32
+boots, browse to the device IP address to control the ventilation system.
 
 ![Schematic](Schematic.png)
 
