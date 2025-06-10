@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brink WTW Control</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+button { padding: 6px 12px; margin: 4px; }
+</style>
+<script>
+function sendCommand(id, state) {
+  fetch('/switch/' + id + '?turn=' + state)
+    .then(res => console.log(id + ' ' + state + ' -> ' + res.status));
+}
+</script>
+</head>
+<body>
+<h1>Brink/Elan Ventilation Control</h1>
+<div>
+  <h2>WTW</h2>
+  <button onclick="sendCommand('relay9','ON')">Positie 4</button>
+  <button onclick="sendCommand('relay1','ON')">Positie 3</button>
+  <button onclick="sendCommand('relay2','ON')">Positie 2</button>
+  <button onclick="sendCommand('position1','ON')">Positie 1</button>
+</div>
+<div>
+  <h2>Elan beneden</h2>
+  <button onclick="sendCommand('relay5','ON')">Positie 4</button>
+  <button onclick="sendCommand('relay4','ON')">Positie 3</button>
+  <button onclick="sendCommand('relay3','ON')">Positie 2</button>
+  <button onclick="sendCommand('elanbenedenp1','ON')">Positie 1</button>
+</div>
+<div>
+  <h2>Elan boven</h2>
+  <button onclick="sendCommand('relay8','ON')">Positie 4</button>
+  <button onclick="sendCommand('relay7','ON')">Positie 3</button>
+  <button onclick="sendCommand('relay6','ON')">Positie 2</button>
+  <button onclick="sendCommand('elanbovenp1','ON')">Positie 1</button>
+</div>
+</body>
+</html>
