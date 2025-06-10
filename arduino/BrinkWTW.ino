@@ -3,8 +3,28 @@
 #include <ESPAsyncWebServer.h>
 #include <AsyncTCP.h>
 #include <LittleFS.h>
+#ifdef USE_MQTT
+#include <PubSubClient.h>
+
+#ifndef MQTT_HOST
+#define MQTT_HOST "localhost"
+#endif
+
+#ifndef MQTT_PORT
+#define MQTT_PORT 1883
+#endif
+
+WiFiClient mqttWifiClient;
+PubSubClient mqttClient(mqttWifiClient);
+#endif
 
 AsyncWebServer server(80);
+
+#ifdef USE_MQTT
+void initMqtt() {
+  mqttClient.setServer(MQTT_HOST, MQTT_PORT);
+}
+#endif
 
 struct SwitchDef {
   const char *id;
@@ -59,6 +79,10 @@ void setup() {
 
   WiFi.mode(WIFI_AP_STA);
 
+#ifdef USE_MQTT
+  initMqtt();
+#endif
+
   server.on("/sensors", HTTP_GET, [](AsyncWebServerRequest *req){
     // Minimal stub response similar to ESPHome web_server
     String json = "{\"sensors\":[{\"name\":\"WiFi RSSI\",\"value\":" + String(WiFi.RSSI()) + "}]}";
@@ -85,4 +109,7 @@ void setup() {
 }
 
 void loop() {
+#ifdef USE_MQTT
+  mqttClient.loop();
+#endif
 }

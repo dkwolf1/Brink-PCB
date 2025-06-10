@@ -17,9 +17,17 @@ prefer the Arduino IDE, follow the steps below to build the sketch in
 1. Install the required libraries in the Arduino IDE using the Library Manager:
    - **ESPAsyncWebServer**
    - **AsyncTCP**
+   - **PubSubClient** (only needed when MQTT is enabled)
 2. Open `arduino/BrinkWTW.ino` in the Arduino IDE.
 3. Select an ESP32 board (for example **ESP32 Dev Module**) and upload the
    sketch to your device.
+
+### Enabling MQTT
+
+To compile the sketch with MQTT support, define the `USE_MQTT` flag. The
+simplest way in the Arduino IDE is to add `#define USE_MQTT` near the top of
+`BrinkWTW.ino` before compiling. When the flag is omitted, the sketch is built
+without the MQTT client and no additional libraries are required.
 
 ## Extra webinterface
 
