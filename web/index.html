@@ -11,12 +11,41 @@ body {
     color: #000;                /* black text */
 }
 button { padding: 6px 12px; margin: 4px; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid #666; padding: 4px 8px; }
 </style>
 <script>
 function sendCommand(id, state) {
   fetch('/switch/' + id + '?turn=' + state)
     .then(res => console.log(id + ' ' + state + ' -> ' + res.status));
 }
+
+function loadSensors() {
+  fetch('/sensors')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('sensorBody');
+      tbody.innerHTML = '';
+      data.sensors.forEach(s => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${s.name}</td><td>${s.value}</td>`;
+        tbody.appendChild(row);
+      });
+    });
+}
+
+function saveNetwork() {
+  const ip = document.getElementById('ip').value;
+  const subnet = document.getElementById('subnet').value;
+  const gateway = document.getElementById('gateway').value;
+  fetch('/network', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ip, subnet, gateway })
+  }).then(res => alert('Network update ' + res.status));
+}
+
+window.onload = loadSensors;
 </script>
 </head>
 <body>
@@ -41,6 +70,24 @@ function sendCommand(id, state) {
   <button onclick="sendCommand('relay7','ON')">Positie 3</button>
   <button onclick="sendCommand('relay6','ON')">Positie 2</button>
   <button onclick="sendCommand('elanbovenp1','ON')">Positie 1</button>
+</div>
+
+<div>
+  <h2>Sensors</h2>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Value</th></tr>
+    </thead>
+    <tbody id="sensorBody"></tbody>
+  </table>
+</div>
+
+<div>
+  <h2>Network settings</h2>
+  <label>IP address: <input id="ip" type="text"></label><br>
+  <label>Subnet mask: <input id="subnet" type="text"></label><br>
+  <label>Gateway: <input id="gateway" type="text"></label><br>
+  <button onclick="saveNetwork()">Save</button>
 </div>
 </body>
 </html>
