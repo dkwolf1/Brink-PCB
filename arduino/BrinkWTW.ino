@@ -56,6 +56,20 @@ SwitchDef switches[] = {
   {"relay8", 22},
 };
 
+void setRelay(const char *id, bool state) {
+  for (auto &sw : switches) {
+    if (strcmp(id, sw.id) == 0) {
+      digitalWrite(sw.pin, state ? HIGH : LOW);
+#ifdef USE_MQTT
+      ensureMqtt();
+      String topic = String("brink/") + id;
+      mqttClient.publish(topic.c_str(), state ? "1" : "0");
+#endif
+      break;
+    }
+  }
+}
+
 void handleSwitch(AsyncWebServerRequest *request) {
   if (request->pathArg(0) == String()) {
     request->send(400, "text/plain", "No switch id");
@@ -68,14 +82,38 @@ void handleSwitch(AsyncWebServerRequest *request) {
   }
   String turn = request->getParam("turn")->value();
   bool state = turn.equalsIgnoreCase("on") || turn == "1";
+
+  if (id == "position1") {
+    if (state) {
+      setRelay("relay1", false);
+      setRelay("relay2", false);
+      setRelay("relay9", false);
+    }
+    request->send(200, "text/plain", "OK");
+    return;
+  }
+  if (id == "elanbenedenp1") {
+    if (state) {
+      setRelay("relay3", false);
+      setRelay("relay4", false);
+      setRelay("relay5", false);
+    }
+    request->send(200, "text/plain", "OK");
+    return;
+  }
+  if (id == "elanbovenp1") {
+    if (state) {
+      setRelay("relay6", false);
+      setRelay("relay7", false);
+      setRelay("relay8", false);
+    }
+    request->send(200, "text/plain", "OK");
+    return;
+  }
+
   for (auto &sw : switches) {
     if (id == sw.id) {
-      digitalWrite(sw.pin, state ? HIGH : LOW);
-#ifdef USE_MQTT
-      ensureMqtt();
-      String topic = String("brink/") + id;
-      mqttClient.publish(topic.c_str(), state ? "1" : "0");
-#endif
+      setRelay(sw.id, state);
       request->send(200, "text/plain", "OK");
       return;
     }
