@@ -14,4 +14,4 @@ ESPHome dashboard or served separately.
 
 ![Schematic](Schematic.png)
 
-![PCB](PCB_WTW.png)
+![PCB](PCB.png)
