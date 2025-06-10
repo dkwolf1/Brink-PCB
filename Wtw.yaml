@@ -1,5 +1,5 @@
 esphome:
-  name: esphome-web-d0df24
+  name: BrinkWTW
 
 esp32:
   board: esp32dev
@@ -44,7 +44,7 @@ time:
   - platform: homeassistant
     id: time_homeassistant
     on_time_sync:
-      - component.update: d0df24_uptime_timestamp
+      - component.update: brink_uptime_timestamp
 
 switch:
   - platform: gpio
@@ -142,24 +142,24 @@ text_sensor:
   - platform: wifi_info
     ip_address:
       name: IP-adres
-      id: d0df24_ip_adres
+      id: brink_ip_adres
       icon: mdi:ip-network
     ssid:
       name: Netwerk
-      id: d0df24_netwerk
+      id: brink_netwerk
       icon: mdi:access-point-network
     mac_address:
       name: Mac-adres
-      id: d0df24_mac_adres
+      id: brink_mac_adres
       icon: mdi:folder-key-network-outline
       
 sensor:
   - platform: wifi_signal
-    name: "d0df24 WiFi Signal"
+    name: "Brink WiFi Signal"
     update_interval: 120s
   
   - platform: uptime
-    id: d0df24_uptime
+    id: Brink_uptime
   
   - platform: internal_temperature
     name: "esp32_temperatuur"
@@ -171,14 +171,14 @@ sensor:
       
  
   - platform: template
-    id: d0df24_uptime_timestamp
+    id: brink_uptime_timestamp
     name: "online sinds"
     device_class: "timestamp"
     accuracy_decimals: 0
     update_interval: never
     lambda: |-
       static float timestamp = (
-        id(time_homeassistant).utcnow().timestamp - id(d0df24_uptime).state
+        id(time_homeassistant).utcnow().timestamp - id(brink_uptime).state
       );
       return timestamp;  
     
