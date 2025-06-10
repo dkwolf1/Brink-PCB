@@ -1,0 +1,12 @@
+# Arduino build outputs
+*.elf
+*.bin
+
+# LittleFS images
+*littlefs*
+*LittleFS*
+
+# Hardware files generated in pcb/
+pcb/*.zip
+pcb/*.csv
+pcb/*.png
