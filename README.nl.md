@@ -55,4 +55,4 @@ Een native EasyEDA-bronbestand van deze revisie zat niet bij de aangeleverde bes
 
 ## Licentie
 
-De bestaande repository is gepubliceerd onder de [MIT-licentie](https://github.com/dkwolf1/Brink-PCB/blob/main/LICENSE). Het licentiebestand staat in de GitHub-repository; dit aanvulpakket vervangt het niet. Wil je de nieuwe hardwarebestanden en artikelen apart licentiëren, leg dan eerst per onderdeel de reikwijdte en rechthebbende vast. Voor een hardwaregerichte, permissieve licentie is CERN-OHL-P-2.0 een optie; voor eigen artikelen is CC BY 4.0 een optie.
+Deze repository wordt gepubliceerd onder de [MIT-licentie](LICENSE). De licentietekst zit ook in dit aanvulpakket.

@@ -59,4 +59,4 @@ No native EasyEDA source file for this revision was included with the supplied f
 
 ## License
 
-The existing repository is published under the [MIT license](https://github.com/dkwolf1/Brink-PCB/blob/main/LICENSE). The license file lives in the GitHub repository; this update package does not replace it. If you want separate licenses for the new material, define their scope and copyright holders first. CERN-OHL-P-2.0 is a permissive option tailored to hardware designs; CC BY 4.0 is an option for articles you own.
+This repository is released under the [MIT license](LICENSE). The license text is included in this update package.
