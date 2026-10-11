@@ -16,8 +16,6 @@ Een ESP32-controller voor de standeningangen van een **Brink Renovent Excellent 
 | [`docs/hardware.md`](docs/hardware.md) | Aansluitingen, projectstatus en controles vóór assemblage |
 | [`docs/firmware.md`](docs/firmware.md) | Uitleg over de meegeleverde ESPHome-configuratie |
 | [`firmware/esphome-web-d0df24.example.yaml`](firmware/esphome-web-d0df24.example.yaml) | Opgeschoond voorbeeld van de aangeleverde configuratie |
-| [`Wtw.yaml`](https://github.com/dkwolf1/Brink-PCB/blob/main/Wtw.yaml), [`arduino/`](https://github.com/dkwolf1/Brink-PCB/tree/main/arduino), [`web/`](https://github.com/dkwolf1/Brink-PCB/tree/main/web) | Bestaande firmware en webinterface uit deze repository |
-| [`Pcb/`](https://github.com/dkwolf1/Brink-PCB/tree/main/Pcb) | Bestaande PCB-bestanden uit deze repository |
 
 ## Werking in het kort
 
@@ -36,7 +34,7 @@ Dit is de toewijzing van het **projectschema**, geen universele Brink-pinout. De
 1. Lees het [schema](hardware/rev-2026-10-11/schema.pdf), de [onderdelenlijst](hardware/rev-2026-10-11/onderdelenlijst.tsv) en de [hardware-notities](docs/hardware.md).
 2. Controleer de werkelijke RJ12-kabel met een multimeter: bepaal de pinnummering en meet de doorverbindingen. Vertrouw niet op aderkleuren.
 3. Controleer relaismodule, stuurpolariteit, voeding, contactvolgorde en opstartgedrag op de werkbank voordat je een toestel aansluit.
-4. Kies een firmwarevariant. De bestaande [`Wtw.yaml`](https://github.com/dkwolf1/Brink-PCB/blob/main/Wtw.yaml) staat in de hoofdmap; het nieuw aangeleverde [ESPHome-voorbeeld](firmware/esphome-web-d0df24.example.yaml) staat apart. Lees eerst de [firmware-notities](docs/firmware.md).
+4. Gebruik het aangeleverde [ESPHome-voorbeeld](firmware/esphome-web-d0df24.example.yaml) als basis. Voeg eigen secrets toe en controleer de configuratie op jouw hardware. Lees eerst de [firmware-notities](docs/firmware.md).
 5. Meet de betreffende X2-aansluiting op het eigen toestel en test daarna één kanaal tegelijk. De artikelen in [`docs/artikelen/`](docs/artikelen/) geven de achtergrond.
 
 ## Productiebestanden
@@ -56,3 +54,5 @@ Een native EasyEDA-bronbestand van deze revisie zat niet bij de aangeleverde bes
 ## Licentie
 
 Deze repository wordt gepubliceerd onder de [MIT-licentie](LICENSE). De licentietekst zit ook in dit aanvulpakket.
+
+Zie [CONTRIBUTING.md](CONTRIBUTING.md) voor bijdragen en [SECURITY.md](SECURITY.md) voor het melden van veiligheids- of beveiligingsproblemen.

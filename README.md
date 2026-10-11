@@ -16,8 +16,6 @@ An ESP32 controller for the switch inputs of a **Brink Renovent Excellent 300/40
 | [`docs/hardware.md`](docs/hardware.md) | Connections, project status, and checks before assembly (Dutch) |
 | [`docs/firmware.md`](docs/firmware.md) | Notes on the supplied ESPHome configuration (Dutch) |
 | [`firmware/esphome-web-d0df24.example.yaml`](firmware/esphome-web-d0df24.example.yaml) | Sanitised example of the newly supplied configuration |
-| [`Wtw.yaml`](https://github.com/dkwolf1/Brink-PCB/blob/main/Wtw.yaml), [`arduino/`](https://github.com/dkwolf1/Brink-PCB/tree/main/arduino), [`web/`](https://github.com/dkwolf1/Brink-PCB/tree/main/web) | Firmware and web interface already present in this repository |
-| [`Pcb/`](https://github.com/dkwolf1/Brink-PCB/tree/main/Pcb) | PCB files already present in this repository |
 
 ## How it works
 
@@ -36,12 +34,10 @@ This mapping comes from the **project schematic**. It is not a universal Brink R
 1. Review the [schematic](hardware/rev-2026-10-11/schema.pdf), [BOM](hardware/rev-2026-10-11/onderdelenlijst.tsv), and [hardware notes](docs/hardware.md).
 2. Check the actual RJ12 cable with a multimeter. Identify pin numbers and continuity; wire colours are not reliable.
 3. Test the relay module, signal polarity, supply, contact order, and cold-boot behaviour on the bench before connecting a Brink appliance.
-4. Choose a firmware starting point. The existing [`Wtw.yaml`](https://github.com/dkwolf1/Brink-PCB/blob/main/Wtw.yaml) remains in the repository root; the newly supplied [ESPHome example](firmware/esphome-web-d0df24.example.yaml) is separate. Read the [firmware notes](docs/firmware.md).
+4. Start from the supplied [ESPHome example](firmware/esphome-web-d0df24.example.yaml). Add your own secrets and verify the configuration against your hardware. Read the [firmware notes](docs/firmware.md).
 5. Measure the X2 connection on your own appliance and test one channel at a time. The [Dutch articles](docs/artikelen/) provide additional background.
 
-### Firmware already in this repository
-
-The existing [`arduino/`](https://github.com/dkwolf1/Brink-PCB/tree/main/arduino) sketch and [`web/`](https://github.com/dkwolf1/Brink-PCB/tree/main/web) interface remain available alongside ESPHome. Follow the instructions in those files for their respective build and upload steps. The new YAML example has not been compiled or tested on the new PCB.
+The YAML example has not been compiled or tested on the new PCB. It enables encrypted OTA for a new serial installation. If you already have a device running ESPHome, follow the [OTA migration guidance](docs/firmware.md) before changing its update settings. This repository currently contains no Arduino sketch or web interface.
 
 ## Manufacturing files
 
@@ -60,3 +56,5 @@ No native EasyEDA source file for this revision was included with the supplied f
 ## License
 
 This repository is released under the [MIT license](LICENSE). The license text is included in this update package.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for submissions and [SECURITY.md](SECURITY.md) for private reporting of safety or security problems.

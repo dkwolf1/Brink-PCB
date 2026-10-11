@@ -1,0 +1,12 @@
+# Local ESPHome configuration and generated output
+secrets.yaml
+.esphome/
+*.bin
+*.elf
+*.map
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
