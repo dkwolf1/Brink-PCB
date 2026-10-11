@@ -1,6 +1,6 @@
 # ESPHome-configuratie
 
-De repository bevat al [`Wtw.yaml`](../Wtw.yaml). De nieuw aangeleverde configuratie staat afzonderlijk als [`firmware/esphome-web-d0df24.example.yaml`](../firmware/esphome-web-d0df24.example.yaml), zodat de bestaande firmware intact blijft. Het voorbeeld is niet op de nieuwe PCB gecompileerd of getest.
+De repository bevat al [`Wtw.yaml`](https://github.com/dkwolf1/Brink-PCB/blob/main/Wtw.yaml). De nieuw aangeleverde configuratie staat afzonderlijk als [`firmware/esphome-web-d0df24.example.yaml`](../firmware/esphome-web-d0df24.example.yaml), zodat de bestaande firmware intact blijft. Het voorbeeld is niet op de nieuwe PCB gecompileerd of getest.
 
 ## Verschillen met het aangeleverde bestand
 
